@@ -1,6 +1,6 @@
 # AdventOfCode
 
-**TODO: Add description**
+**Learning Elixir with Advent of Code 2017**
 
 ## Installation
 
