@@ -1,19 +1,19 @@
 defmodule AOC08 do
   #Day 8: I Heard You Like Registers
   def part_I(filename) do
-    read_file(filename)
+    normalize_input(filename)
     |> process
     |> elem(0)
     |> Map.values
     |> Enum.max
   end
   def part_II(filename) do
-    read_file(filename)
+    normalize_input(filename)
     |> process
     |> elem(1)
     |> Enum.max
   end
-  def read_file(filename) do
+  def normalize_input(filename) do
     File.read!(filename)
     |> String.split("\n", trim: true)
     |> Enum.map(&String.split/1)
@@ -30,9 +30,7 @@ defmodule AOC08 do
     end)
   end
   def process(instructions, registers \\ %{}, values \\ [])
-  def process([], registers, values) do
-    {registers, values}
-  end
+  def process([], registers, values), do: {registers, values}
   def process([hd | tl], registers, values) do
     if apply(Kernel, elem(hd,4), [Map.get(registers, elem(hd, 3), 0), elem(hd, 5)]) do
       value = apply(__MODULE__, elem(hd,1), [Map.get(registers, elem(hd, 0), 0), elem(hd, 2)])
@@ -44,4 +42,5 @@ defmodule AOC08 do
   def inc(a, b), do: a + b
   def dec(a, b), do: a - b
 end
-IO.inspect AOC08.part_II("input.txt")
+IO.puts "Part I: #{AOC08.part_I("input.txt")}"
+IO.puts "Part II: #{AOC08.part_II("input.txt")}"
