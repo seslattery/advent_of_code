@@ -34,7 +34,6 @@ defmodule AOC08 do
     {registers, values}
   end
   def process([hd | tl], registers, values) do
-    #IO.puts "Processing"
     if apply(Kernel, elem(hd,4), [Map.get(registers, elem(hd, 3), 0), elem(hd, 5)]) do
       value = apply(__MODULE__, elem(hd,1), [Map.get(registers, elem(hd, 0), 0), elem(hd, 2)])
       process(tl, Map.put(registers, elem(hd, 0), value), [value] ++ values)
